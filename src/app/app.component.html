@@ -1,0 +1,31 @@
+<mat-toolbar color="primary">  
+    <span [routerLink]="['/']">Proyecto Practica</span>
+    <span class="space"></span>
+    
+    <button *ngIf = "!isloggedIn()" [routerLink]="['/signin']" mat-icon-button>
+        <mat-icon class="account-circle">verified_user</mat-icon>
+    </button>
+
+    <div *ngIf="isLogdedIn()">
+
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                <mat-menu #menu="matMenu">
+                    
+                    <button mat-menu-item disabled>
+                      {{fullName() }}
+                    </button>
+                    <button mat-menu-item (click)='logout()' >
+                        Cerrar Sesion
+                    </button>
+                  </mat-menu>        
+    </div>
+    
+    
+    
+</mat-toolbar>
+
+
+<router-outlet></router-outlet>
+

@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+.space{
+    flex: 1 1 auto;
+}
+
+body{
+    margin:0;
+    font-family: 'Roboto';
+}
+
+
+
+
+form{
+    display:flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 40px auto;  /* esto indica el primero arriba y abajo y el segundo a derecha e izquierda*/
+    margin-top: 20px; /*solo se va a pisar el top margin*/
+}

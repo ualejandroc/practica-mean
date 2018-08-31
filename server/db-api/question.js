@@ -1,0 +1,41 @@
+import Debug from 'debug'
+import {Question, Answer} from '../models'
+
+const debug = new Debug('practica-mean:db-api:questions')
+
+export default {
+    findAll: (sort = '-createdAt' ) => {
+        debug('Finding all questions')
+        return  Question.find().populate('answers').sort(sort)
+    },
+
+    findById: (id)=>{
+        debug(`Finding question with id: ${id}`)
+        return   Question
+                    .findOne({_id})
+                    .populate('user')  //este es el campo dentro del modelo question
+                    .populate({
+                        path: 'answer',
+                        options:{sort: '-createdAt'},
+                        populate:{
+                            path:'user',
+                            model: 'User'
+                        }
+                    })
+                },
+
+    create: (q)=>{
+        debug(`creating question ${q}`)
+        const question = new Question(q)
+        return question.save()
+    },
+
+    createAnswer:async (q,a)=>{
+        const answer = new Answer(a)
+        const savedAnswer = answer.save()
+        q.answers.push(savedAnswer)
+        await q.save()
+        return savedAnswer
+    }
+
+}

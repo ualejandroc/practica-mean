@@ -1,0 +1,39 @@
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <mat-form-field>
+        <input
+          matInput 
+          placeholder="Titulo"
+          name="title"
+          id="titulo"
+          ngModel>
+    </mat-form-field>
+    <mat-form-field>
+        <input
+          matInput 
+          placeholder="Descripcion"
+          name="description"
+          id="description"
+          ngModel>
+    </mat-form-field>
+
+    <mat-grid-list cols="3" rowhight="3,2">
+
+            <mat-grid-tile >
+                    <mat-radio-button  [ngModel]  name="icon"  value='none'>
+                            <mat-icon class="material-icons help icons-list" >Help</mat-icon>
+                            <small>SIn icono</small>
+                        </mat-radio-button>
+                    
+            </mat-grid-tile>
+
+        <mat-grid-tile *ngFor="let icon of icons">
+                <mat-radio-button [ngModel] name="icon"  value='devicon-{{icon.name}}-{{getIconVersion(icon)}}'>
+
+                </mat-radio-button>
+                <mat-icon class='icons-list devicon-{{icon.name}}-{{getIconVersion(icon)}} ' *ngIf="icon.name!='illustrator'" ></mat-icon>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+
+    <button type="submit" mat-rised-button class="accent">Enviar</button>
+</form>
