@@ -49,7 +49,9 @@ import { QuestionScreenComponent } from './question/question-screen.component';
     SigninScreenComponent,
     SignupScreenComponent,
     QuestionListComponent,
-    QuestionFormComponent
+    QuestionFormComponent,
+
+    QuestionScreenComponent
   ],
   imports: [
     BrowserModule,

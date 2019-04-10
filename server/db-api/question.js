@@ -1,7 +1,7 @@
 import Debug from 'debug'
 import {Question, Answer} from '../models'
 
-const debug = new Debug('practica-mean:db-api:questions')
+const debug = new Debug('practica-mean:db-api:questions') 
 
 export default {
     findAll: (sort = '-createdAt' ) => {
@@ -25,12 +25,12 @@ export default {
                 },
 
     create: (q)=>{
-        debug(`creating question ${q}`)
+        console.log(`creating question ${q}`)
         const question = new Question(q)
         return question.save()
     },
 
-    createAnswer:async (q,a)=>{
+    createAnswer : async (q,a) =>{
         const answer = new Answer(a)
         const savedAnswer = answer.save()
         q.answers.push(savedAnswer)

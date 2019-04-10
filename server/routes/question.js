@@ -2,40 +2,66 @@ import  express from "express"
 import { 
     required, 
      questionMiddeleware, 
-    // questionsMiddeleware    // esto ya no va porque se va a usar la base de datos
 } from "../middleware";
+
+
 
 import {question} from '../db-api'
 
 //utils
 import {handleError} from '../utils'
 
-import {User} from '../models'
+import {User, Answer} from '../models'
 
 const app = express.Router()
 
-// const currentUser={
-//     firstName: 'Sasha',
-//         lastName: 'Lifszyc',
-//         email: 'sacha@gmail.com',
-//         password:'12345'
-// }
+/********************** */
+
+/* GET home page. */
+app.get('/view', function(req, res, next) {
+    res.render('question');
+  });
+
+app.post('/insert', async function(req, res, next) {
+    var user= new User({_id: req.body.user})
+    // var answer = new Answer({_id: req.body.answer})
+    var answer = new Answer()
+    var item = {
+        type: req.body.type,
+        description: req.body.description,
+        icon: req.body.icon,
+        password: req.body.password,
+        createdAt: req.body.createdAt,
+        user:user,
+        answer: answer,
+    };
+
+
+   console.log(item)
+    // var data = new User(item);
+    // await data.save();
+    const savedQuestion= question.create(item);
+  
+    res.redirect('/questions/view');
+  });
 
 
 
 
-// function userMiddleware(req, res, next){
-//     req.user=currentUser
-//     next()
-// }
+
+app.get('/get', function(req, res, next) {
+    question.findAll().find()
+        .then(function(doc) {
+          res.render('question', {items: doc});
+        });
+  });
+
+  ////////////
 
 
-/************ */
-//cuando el frontend reciba   api/questions
-// app.get('/', 
-// questionsMiddeleware ,
-// (req, res)=> res.status(200).json(req.questions))
-//lo anterir ya no se usa por la base de datos
+
+
+
 
 //ahira queda asi
 app.get('/', async (req, res)=>{
@@ -57,7 +83,7 @@ app.get('/:id', (req, res)=> {
     //res.status(200).json(q)
 
     try{
-        const q = await question.findById(req.params.id)
+        const q = /*await*/ question.findById(req.params.id)
         res.status(200).json(q)        
     }catch(error){
         handleError(error,res)
@@ -67,21 +93,15 @@ app.get('/:id', (req, res)=> {
 })
 
 
-app.post("/", required, questionsMiddeleware,async (req,res)=>{   //antes usabamos userMiddleware en lugar de required
-    // const question = req.body
-    // question._id=+ new Date()  // por el mas adelante devuelve segundos desde 1970
-    // question.user= req.user     // esto proviene del middleware
-    // question.createdAt= new Date()
-    // question.answers = []
-
-    // req.questions.push(question)
-
+app.post("/",  /*required,  questionMiddeleware, */   async (req,res)=>{   
+  
+    
     const {title, description, icon} = req.body
     const q = {
         title, 
         description, 
         icon,
-        user : req.user._id   //mongoose llena el objeto automaticamente
+        user : req.user._id   
     }
 
     try{
@@ -94,8 +114,9 @@ app.post("/", required, questionsMiddeleware,async (req,res)=>{   //antes usabam
     
 })
 
+///// ANswers //////
 
-app.post('/:id/answer', required, questionMiddeleware, async (res,requ)=>{
+app.post('/:id/answer', /* required, questionMiddeleware ,*/  async (res,requ)=>{
     const answer = req.body
     const q = req.question   // ya tenemos este question por el questionMiddeleware
     answer.createdAt= new Date()
@@ -115,5 +136,50 @@ app.post('/:id/answer', required, questionMiddeleware, async (res,requ)=>{
     res.status(201).json()
 
 })
+
+
+/********************** */
+
+/* GET home page. */
+app.get('/ans', function(req, res, next) {
+    res.render('answers');
+  });
+
+app.post('/ans/insert', async function(req, res, next) {
+    var user= new User({_id: req.body.user})
+    // var answer = new Answer({_id: req.body.answer})
+    var answer = new Answer()
+    var item = {
+        
+        description: req.body.description,        
+        createdAt: req.body.createdAt,
+        user:user,
+    };
+
+
+   console.log(item)
+    // var data = new User(item);
+    // await data.save();
+    const savedQuestion= question.create(item);
+  
+    res.redirect('/ans');
+  });
+
+
+
+
+
+app.get('/ans/get', function(req, res, next) {
+    question.findAll().find()
+        .then(function(doc) {
+          res.render('answers', {items: doc});
+        });
+  });
+
+  ////////////
+
+
+
+
 
 export default app

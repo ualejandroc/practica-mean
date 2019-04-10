@@ -5,6 +5,7 @@ import {secret} from  '../config'
 // import {findUserByEmail, users} from '../middleware'
 
 import {User } from '../models'
+
 import {
     hashSync as hash,
     compareSync as comparePassword
@@ -18,6 +19,40 @@ const debug = new Debug('practica-mean:auth')
 // const comparePassword=(providerPassword, userPassword)=>{
 //     return providerPassword==userPassword
 // }
+
+
+/* GET home page. */
+app.get('/', function(req, res, next) {
+    res.render('index');
+  });
+
+app.post('/insert', async function(req, res, next) {
+    var item = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password,
+        createdAt: req.body.createdAt,
+    };
+   console.log(item)
+    var data = new User(item);
+    await data.save();
+  
+    res.redirect('/api/auth/');
+  });
+
+
+
+
+
+app.get('/get', function(req, res, next) {
+    User.find()
+        .then(function(doc) {
+          res.render('index', {items: doc});
+        });
+  });
+
+  ////////////
 
 
 app.post('/signin',async (req,res,next)=>{
@@ -48,18 +83,13 @@ app.post('/signin',async (req,res,next)=>{
         lastName: user.lastName,
         email: user.email
     })
+})
 
     // la ruta esta montada sobre /api/auth/
     // lo que resultaria en /api/auth/signup
-    app.post('/signup', async (req,res)=>{
+app.post('/signup', async (req,res)=>{
         const{ firstName, lastName, email, password } =req.body
-        // const user ={
-        //     _id: +new Date(),
-        //     firstName,
-        //     lastName: lastName,
-        //     email,
-        //     password
-        // }
+   
 
         const u = new User({
             firstName,
@@ -93,9 +123,10 @@ app.post('/signin',async (req,res,next)=>{
 
     }
 
-    const createToken=(user) =>   jwt.sign({user}, secret, {expiresIn:86400})
+    const createToken=(user) =>  
+     jwt.sign({user}, secret, {expiresIn:86400})
 
 
-})
+
 
 export default app

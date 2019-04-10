@@ -4,7 +4,7 @@ import {handleError} from '../utils'
 
 
 
-const question= {
+const questionOld= {
     _id:'1',
     title: 'Como reutilizo un componente ?',
     description: 'Miren esta pregunta..',
@@ -34,6 +34,7 @@ export const questionsMiddeleware=(req, res, next)=>{
 //     next()
 // }
 export const  questionMiddeleware= async (req, res, next)=>{
+    console.log(req.question)
     try{req.question = await question.findById(req,params.id)
     next()}
     catch(error){
