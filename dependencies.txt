@@ -1,0 +1,41 @@
+
+
+npm i @angular/core
+npm i @angular-devkit/build-angular
+npm i @angular/compiler-cli
+npm i @angular/compiler
+npm install --save @angular/material @angular/cdk @angular/animations
+npm install --save hammerjs
+npm i @angular/http
+npm i @angular/platform-browser
+npm i @angular/router
+npm i @angular/forms
+npm i @angular/common
+npm i @angular/platform-browser-dynamic
+npm i zone.js
+npm i @types/url-join
+
+npm install @babel/core @babel/node --save-dev
+npm install --save debug
+
+npm install --save express nodemon currently
+
+npx babel-upgrade --write --install
+
+
+npm i mongoose
+npm install --save express nodemon currently
+
+npm install -D babel-cli
+npm install -D babel-preset-es2015
+
+
+npm install --save npm-run-all
+npm install -g win-node-env
+
+npm install --save express body-parser mongoose
+npm i mongoose-unique-validator
+npm i bcryptjs
+
+
+npm i multer
