@@ -78,14 +78,13 @@ app.get('/', async (req, res)=>{
 /***** */
 
 //cuando el frontend reciba   api/questions/:id
-app.get('/:id', async (req, res)=> {
+app.get('/:id',  (req, res)=> {
     // const {id} = req.params
     // const q = question.find(question=> question._id == +id)
     //res.status(200).json(q)
 
     try{
-        const q = await question.findById(req.params.id)
-        console.log(q)
+        const q =  question.findById(req.params.id)       
         res.status(200).json(q)        
     }catch(error){
         handleError(error,res)

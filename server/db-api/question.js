@@ -11,8 +11,9 @@ export default {
 
     findById: async (id)=>{
         debug(`Finding question with id: ${id}`)
+        var qObj= new Question()
         var qu= await  Question
-                    .findOne({id})
+                    .findById( id , { lean: true })
                     .populate('user')  //este es el campo dentro del modelo question
                     .populate({
                         path: 'answer',
@@ -21,8 +22,11 @@ export default {
                             path:'user',
                             model: 'User'
                         }
-                    }).exec()
-        console.log(qu)
+                    })//.cast(Question, qObj)
+                    .exec()
+        
+        console.log(qu)          
+        
         return qu
 
     },
