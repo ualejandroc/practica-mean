@@ -9,10 +9,10 @@ export default {
         return  Question.find().populate('answers').sort(sort)
     },
 
-    findById: (id)=>{
+    findById: async (id)=>{
         debug(`Finding question with id: ${id}`)
-        return   Question
-                    .findOne({_id})
+        var qu= await  Question
+                    .findOne({id})
                     .populate('user')  //este es el campo dentro del modelo question
                     .populate({
                         path: 'answer',
@@ -21,8 +21,11 @@ export default {
                             path:'user',
                             model: 'User'
                         }
-                    })
-                },
+                    }).exec()
+        console.log(qu)
+        return qu
+
+    },
 
     create: (q)=>{
         console.log(`creating question ${q}`)

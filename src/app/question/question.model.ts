@@ -6,12 +6,13 @@ export class Question{
     description: string;
     createdAt?: Date;
     icon?:string;
-    answers: Answer[]
+    answers: Answer[];
 
     constructor(title: string,
         description: string,
         createdAt?: Date,
-        icon?:string){
+        icon?:string)
+        {
             this._id='1';
             this.title=title;
             this.description=description;
@@ -19,5 +20,5 @@ export class Question{
             this.icon=icon;
             this.answers=[];
         
-    }
+       }
 }

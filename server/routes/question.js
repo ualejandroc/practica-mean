@@ -27,7 +27,7 @@ app.post('/insert', async function(req, res, next) {
     // var answer = new Answer({_id: req.body.answer})
     var answer = new Answer()
     var item = {
-        type: req.body.type,
+        title: req.body.title,
         description: req.body.description,
         icon: req.body.icon,
         password: req.body.password,
@@ -67,8 +67,9 @@ app.get('/get', function(req, res, next) {
 app.get('/', async (req, res)=>{
     try{
       const {sort} = req.query
-      await question.findAll(sort)  
-      res.status(200).json(question)
+      let questions = await question.findAll(sort)  
+      res.status(200).json(questions)
+    //   console.log(questions)
     }catch(err){
         handleError(err,res) 
     }
@@ -77,13 +78,14 @@ app.get('/', async (req, res)=>{
 /***** */
 
 //cuando el frontend reciba   api/questions/:id
-app.get('/:id', (req, res)=> {
+app.get('/:id', async (req, res)=> {
     // const {id} = req.params
     // const q = question.find(question=> question._id == +id)
     //res.status(200).json(q)
 
     try{
-        const q = /*await*/ question.findById(req.params.id)
+        const q = await question.findById(req.params.id)
+        console.log(q)
         res.status(200).json(q)        
     }catch(error){
         handleError(error,res)
@@ -141,28 +143,24 @@ app.post('/:id/answer', /* required, questionMiddeleware ,*/  async (res,requ)=>
 /********************** */
 
 /* GET home page. */
-app.get('/ans', function(req, res, next) {
+app.get('/ans/view', function(req, res, next) {
     res.render('answers');
   });
 
-app.post('/ans/insert', async function(req, res, next) {
+app.post('/ans/insert/', async function(req, res, next) {
     var user= new User({_id: req.body.user})
     // var answer = new Answer({_id: req.body.answer})
     var answer = new Answer()
-    var item = {
-        
+    var item = {        
         description: req.body.description,        
         createdAt: req.body.createdAt,
         user:user,
     };
 
-
    console.log(item)
-    // var data = new User(item);
-    // await data.save();
-    const savedQuestion= question.create(item);
+    const savedQuestion= await answer.save(item);
   
-    res.redirect('/ans');
+    res.redirect('/api/questions/ans/view');
   });
 
 
@@ -170,7 +168,8 @@ app.post('/ans/insert', async function(req, res, next) {
 
 
 app.get('/ans/get', function(req, res, next) {
-    question.findAll().find()
+    var answer = new Answer()
+    answer.findAll().find()
         .then(function(doc) {
           res.render('answers', {items: doc});
         });

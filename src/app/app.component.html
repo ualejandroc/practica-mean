@@ -2,11 +2,11 @@
     <span [routerLink]="['/']">Proyecto Practica</span>
     <span class="space"></span>
     
-    <button *ngIf = "!isloggedIn()" [routerLink]="['/signin']" mat-icon-button>
+    <button *ngIf = "!isLoggedIn()" [routerLink]="['/signin']" mat-icon-button>
         <mat-icon class="account-circle">verified_user</mat-icon>
     </button>
 
-    <div *ngIf="isLogdedIn()">
+    <div *ngIf="isLoggedIn()">
 
             <button mat-icon-button [matMenuTriggerFor]="menu">
                     <mat-icon>more_vert</mat-icon>

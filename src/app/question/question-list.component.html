@@ -6,7 +6,7 @@
       <mat-icon class='material-icons icon-question help' mat-list-icon *ngIf="questions.icon=='none'"></mat-icon>
       <mat-icon class='material-icons icon-question {{question.icon}}' mat-list-icon *ngIf="questions.icon!='none'"></mat-icon>
       <h3 mat-line>{{question.title}}</h3>
-      <p mat-line> <small>{{question.answers.length}} respuestas - {{question.createdAt | amLocale: 'es' | amTimeAgo}} </small> </p>
+      <p mat-line> <small>{{question.answer.length}} respuestas - {{question.createdAt | amLocale: 'es' | amTimeAgo}} </small> </p>
     </mat-list-item>
     <mat-divider></mat-divider>
    

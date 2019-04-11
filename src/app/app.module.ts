@@ -50,7 +50,7 @@ import { QuestionScreenComponent } from './question/question-screen.component';
     SignupScreenComponent,
     QuestionListComponent,
     QuestionFormComponent,
-
+    
     QuestionScreenComponent
   ],
   imports: [
@@ -67,6 +67,7 @@ import { QuestionScreenComponent } from './question/question-screen.component';
     //modulo de http
     HttpModule,
     QuestionScreenComponent
+     
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

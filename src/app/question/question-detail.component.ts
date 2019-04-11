@@ -13,6 +13,7 @@ import {OnDestroy} from '@angular/core'
                                         //el inici app-  ... idica que es un coponente nuestro de a aplicacion
     templateUrl: './question-detail.component.html',
     styleUrls: ['./question-detail.component.css'],
+    providers:[QuestionService]
 })
 
 export class QuestionDetailComponent implements OnInit , OnDestroy{
@@ -42,6 +43,7 @@ export class QuestionDetailComponent implements OnInit , OnDestroy{
             .getQuestion(params.id)
             .then((question:Question)=>{
                 this.question=question;
+                console.log(this.question);
                 this.loading=false;
             })
             

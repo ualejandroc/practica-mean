@@ -25,8 +25,8 @@
         Respuestas
     </h3>
 
-    <ul class="answers-list" *ngIf="question.answers.length>0">
-        <li *ngFor="let answer of question.answers">
+    <ul class="answers-list" *ngIf="question.answer.length>0">
+        <li *ngFor="let answer of question.answer">
             <h5>{{answer.user.firstName}} {{answer.user.lastName}}
                 <small>{{answer.createdAt | amLocale: 'es' | amTimeAgo}}</small>
             </h5>
@@ -48,7 +48,7 @@
         </li>
     </ul>
 
-    <p *ngIf="question.answers.length==0">Se el primero en responder...</p>
+    <p *ngIf="question.answer.length==0">Se el primero en responder...</p>
 
     <app-answer-form class="answer-form"  [question]="question"></app-answer-form>
 

@@ -6,7 +6,7 @@ mongoose.connect("mongodb+srv://ualejandroc:12345@cluster0-w4pp5.mongodb.net/tes
 
 
 const QuestionSchema = Schema({
-    type:{type:String, required: Boolean},
+    title:{type:String, required: Boolean},
     description:{type:String, required: Boolean},
     icon:{type:String, required: Boolean},
     createdAt:{type: Date, default: Date.now, required:Boolean},
