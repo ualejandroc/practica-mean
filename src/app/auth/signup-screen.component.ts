@@ -16,7 +16,8 @@ export class SignupScreenComponent implements OnInit{
     this.signinForm= new FormGroup({
         email: new FormControl(null,[
             Validators.required,
-            Validators.pattern("/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/")
+            Validators.email
+            // Validators.pattern("/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/")
         ]),
 
         password: new FormControl(null,
@@ -24,7 +25,7 @@ export class SignupScreenComponent implements OnInit{
 
         firstName: new FormControl(null,
             Validators.required),
-        lasttName: new FormControl(null,
+        lastName: new FormControl(null,
                 Validators.required)
     })
   }

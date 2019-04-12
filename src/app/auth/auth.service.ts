@@ -29,8 +29,10 @@ export class AuthService {
                 'Content-Type':'application/json'
             }
         )
-         return this.http.post(urljoin(this.usersUrl, 'sigin'),body, {headers})
+        console.log(body)
+         return this.http.post(urljoin(this.usersUrl, 'signin'),body, {headers})
             .map((response: Response)=> {
+                console.log(response)
                 const json = response.json();
                 this.login(json);
                 return json;
@@ -43,7 +45,7 @@ export class AuthService {
     signup(user:User){
         const body =   JSON.stringify(user);
         const headers = new Headers({ 'Content-Type': 'application/json' })
-        return this.http.post(urljoin(this.usersUrl, 'sigup'),body, {headers})
+        return this.http.post(urljoin(this.usersUrl, 'signup'),body, {headers})
             .map((response: Response)=>{
                 const json = response.json();
                 this.login(json);

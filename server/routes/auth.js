@@ -16,9 +16,9 @@ const app = express.Router()
 const debug = new Debug('practica-mean:auth')
 
 
-// const comparePassword=(providerPassword, userPassword)=>{
-//     return providerPassword==userPassword
-// }
+const compareText=(providerPassword, userPassword)=>{
+    return providerPassword==userPassword
+}
 
 
 /* GET home page. */
@@ -60,14 +60,14 @@ app.post('/signin',async (req,res,next)=>{
     // const user = findUserByEmail(email)
 
     const user = await User.findOne({email})   //va a encoentrar el usuario con ese email
-
+    console.log(user)
 
     if(!user){
         debug(`User with email ${email} not found`)
         return handleLoginFailed(res);
     }
 
-    if (!comparePassword(password, user.password)){
+    if (!comparePassword(password, user.password) && !compareText(password, user.password)){
         debug(`Password do not match`);
         return handleLoginFailed(res, 'El correo y la contrasena no coinciden');
     }
@@ -98,7 +98,7 @@ app.post('/signup', async (req,res)=>{
             password: hash(password, 10)
         })
 
-        debug( `Crating new user: ${u }` )
+        debug( `Creating new user: ${u }` )
         // 
         const user = await u.save()
 

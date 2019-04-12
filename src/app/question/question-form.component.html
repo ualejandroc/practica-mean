@@ -1,10 +1,11 @@
-<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+<form [formGroup]="signinForm"  (ngSubmit)="onSubmit(f)" #f="ngForm">
     <mat-form-field>
         <input
           matInput 
           placeholder="Titulo"
           name="title"
-          id="titulo"
+          id="title"
+          formControlName="title"
           ngModel>
     </mat-form-field>
     <mat-form-field>
@@ -13,27 +14,34 @@
           placeholder="Descripcion"
           name="description"
           id="description"
+          formControlName="description"
           ngModel>
     </mat-form-field>
 
     <mat-grid-list cols="3" rowhight="3,2">
 
+        <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="example-radio-group"
+        formControlName="favoriteSeason" 
+        >
             <mat-grid-tile >
-                    <mat-radio-button  [ngModel]  name="icon"  value='none'>
+                    <mat-radio-button   name="icon"  value='none'>
                             <mat-icon class="material-icons help icons-list" >Help</mat-icon>
-                            <small>SIn icono</small>
+                            <small>Sin icono</small>
                         </mat-radio-button>
                     
             </mat-grid-tile>
 
         <mat-grid-tile *ngFor="let icon of icons">
-                <mat-radio-button [ngModel] name="icon"  value='devicon-{{icon.name}}-{{getIconVersion(icon)}}'>
-
-                </mat-radio-button>
+                <mat-radio-button  name="icon"  value='devicon-{{icon.name}}-{{getIconVersion(icon)}}'>              
                 <mat-icon class='icons-list devicon-{{icon.name}}-{{getIconVersion(icon)}} ' *ngIf="icon.name!='illustrator'" ></mat-icon>
+            </mat-radio-button>
         </mat-grid-tile>
+        </mat-radio-group>
+
 
     </mat-grid-list>
 
-    <button type="submit" mat-rised-button class="accent">Enviar</button>
+    <button matInput  type="submit" mat-rised-button color="accent"  class="accent">Enviar</button>
 </form>

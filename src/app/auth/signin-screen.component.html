@@ -1,26 +1,34 @@
-<form (formGroup)="siginForm"  (ngSubmit)="onSubmit()">
-    <mat-form-field>
+<form [formGroup]="signinForm"  (ngSubmit)="onSubmit()">
+    <mat-form-field appearance = "standard">
         <input
           matInput 
           placeholder="Correo electronico"
           formControlName="email"
+          [formControl] = "email"
+          name="email"
           id="email">
+          <!-- <mat-error *ngIf = "email.hasError('required')">
+          Please enter a valid email address
+          </mat-error> -->
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance = "standard">
         <input
           matInput
           placeholder="Contrasena"
           type = "password"
           formControlName="password"
+          [formControl] = "password"
+          name="password"
           id="password">
     </mat-form-field>
-    <mat-form-field>
-        <button type="submit" mat-raised-button color="accent">
+    <!-- <mat-form-field appearance = "standard" >  -->
+        <button matInput  type="submit" mat-raised-button color="accent">
             Iniciar Sesion
         </button>
-    </mat-form-field>
-    <p style="text-align: center">
-       Eres Nuevo ?
-       <a mat-button color='prymary' [routerLink]="['/signup']" >Crear Usuario</a>
-    </p>
+    <!-- </mat-form-field> -->
+    
 </form>
+<p matInput  style="text-align: center">
+    Eres Nuevo ?
+    <a mat-button color='prymary' [routerLink]="['/signup']" >Crear Usuario</a>
+ </p>

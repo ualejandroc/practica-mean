@@ -1,5 +1,5 @@
 import  {Component, OnInit} from "@angular/core";
-import { NgForm } from "@angular/forms";
+import { NgForm, FormGroup, FormControl, Validators } from "@angular/forms";
 import { Question } from "./question.model";
 import  icons from "./icons";
 
@@ -29,10 +29,27 @@ export class QuestionFormComponent implements OnInit{
         private authService: AuthService,
         private router : Router){}
 
+        signinForm: FormGroup; 
+        
+
     ngOnInit(){
         if(!this.authService.isLoggedIn()){
-            this.router.navigateByUrl('/signin')
-        }        
+            // this.router.navigateByUrl('/signin')
+        }
+            this.signinForm= new FormGroup({
+                title: new FormControl('',[
+                    Validators.required,                    
+                ]),
+        
+                description: new FormControl('',
+                Validators.required),
+
+                favoriteSeason:new FormControl('',
+                Validators.required),
+               
+            })
+        
+
     }
 
     icons:Object[]=icons;
@@ -42,8 +59,11 @@ export class QuestionFormComponent implements OnInit{
             form.value.title,
             form.value.description,
             new Date(),
-            form.value.icon
+            form.value.favoriteSeason
         );
+        
+        console.log(q)
+    
         
         
         this.questionService.addQuestion(q)

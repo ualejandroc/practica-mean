@@ -18,12 +18,17 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 
 
+import { ReactiveFormsModule } from '@angular/forms';
+
+
 import {MatToolbarModule,
      MatIconModule, 
      MatCardModule,
      MatInputModule, 
+     MatFormFieldModule
         
     } from '@angular/material';
+  
 
 const modules=
 [
@@ -47,8 +52,11 @@ const modules=
     //Snak bar
     MatSnackBarModule,
     //tabs
-    MatTabsModule
+    MatTabsModule,
 
+    MatFormFieldModule,
+
+    ReactiveFormsModule,
 ];
 
 

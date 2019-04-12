@@ -1,4 +1,4 @@
-<form [formGroup]="siginForm"  (ngSubmit)="onSubmit()">
+<form [formGroup]="signinForm"  (ngSubmit)="onSubmit()">
     <mat-form-field>
         <input
           matInput 
@@ -28,11 +28,11 @@
           formControlName="password"
           id="password">
     </mat-form-field>
-    <mat-form-field>
+
         <button type="submit" mat-raised-button color="accent">
             Crear Usuario
         </button>        
-    </mat-form-field>
+   
     <p style="text-align: center">
             Tienes usuario ?
             <a mat-button color='prymary' [routerLink]="['/signin']" >Iniciar sesion</a>

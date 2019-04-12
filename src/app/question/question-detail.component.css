@@ -40,7 +40,7 @@ h5 small{
 .answer-form{
     position: fixed;       /* esto crra una elelmento con posicion fija */
     bottom: 0;
-    right:0;
+    /* right:0; */
     z-index: 2;    
     background-color: aliceblue        
 }
