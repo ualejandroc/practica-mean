@@ -13,7 +13,7 @@ export default {
         debug(`Finding question with id: ${id}`)
         var qObj= new Question()
         var qu= await  Question
-                    .findById( id , { lean: true })
+                    .findById( id  )                    
                     .populate('user')  //este es el campo dentro del modelo question
                     .populate({
                         path: 'answer',
