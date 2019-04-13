@@ -17,6 +17,7 @@ const debug = new Debug('practica-mean:auth')
 
 
 const compareText=(providerPassword, userPassword)=>{
+    console.log(`Password: ${providerPassword} enviada: ${ userPassword} `);
     return providerPassword==userPassword
 }
 
@@ -60,21 +61,23 @@ app.post('/signin',async (req,res,next)=>{
     // const user = findUserByEmail(email)
 
     const user = await User.findOne({email})   //va a encoentrar el usuario con ese email
+    
     console.log(user)
 
     if(!user){
-        debug(`User with email ${email} not found`)
+        console.log(`User with email ${email} not found`)
         return handleLoginFailed(res);
     }
 
-    if (!comparePassword(password, user.password) && !compareText(password, user.password)){
-        debug(`Password do not match`);
+    if (/*!comparePassword(password, user.password) &&*/ !compareText(password, user.password)){
+        console.log(`Password do not match`);
         return handleLoginFailed(res, 'El correo y la contrasena no coinciden');
     }
 
     const token = createToken(user)
 
-   
+    console.log(token)
+
     res.status(200).json({
         messege: 'Login Succeded',
         token,
@@ -123,8 +126,9 @@ app.post('/signup', async (req,res)=>{
 
     }
 
-    const createToken=(user) =>  
-     jwt.sign({user}, secret, {expiresIn:86400})
+    const createToken=(user) => {        
+     return jwt.sign({email:user.email,fullName: user.firstName, _id: user._id },/*secret*/'miclave' , {expiresIn:86400})
+    }
 
 
 

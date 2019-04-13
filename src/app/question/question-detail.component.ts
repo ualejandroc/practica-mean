@@ -18,10 +18,7 @@ import {OnDestroy} from '@angular/core'
 
 export class QuestionDetailComponent implements OnInit , OnDestroy{
 
-    question?: Question;
-    loading:boolean;
-
-    sub: any;
+    
 
     constructor(
         private questionService: QuestionService,
@@ -37,9 +34,14 @@ export class QuestionDetailComponent implements OnInit , OnDestroy{
     //      'dev-icon-andreoid-plain'  //clase para icono de android
     // );
 
-   ngOnInit(){
-        this.sub=this.route.params.subscribe(params=>{
-            this.questionService
+    question?: Question;
+    loading:boolean;
+
+    sub: any;
+
+     ngOnInit(){
+         this.sub=  this.route.params.subscribe(  params=>  {
+             this.questionService
             .getQuestion(params.id)
             .then((question:Question)=>{
                 this.question=question;

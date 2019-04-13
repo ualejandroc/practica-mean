@@ -29,10 +29,10 @@ export class AuthService {
                 'Content-Type':'application/json'
             }
         )
-        console.log(body)
+        
          return this.http.post(urljoin(this.usersUrl, 'signin'),body, {headers})
             .map((response: Response)=> {
-                console.log(response)
+                //console.log(response)
                 const json = response.json();
                 this.login(json);
                 return json;
@@ -57,6 +57,7 @@ export class AuthService {
     }
 
     login=({token, userId, firstName, lastName,email}) =>{
+        //console.log(token, userId, firstName, lastName,email)
         this.currentUser = new User(email, null, firstName, lastName, userId)
         localStorage.setItem('token',token);
         localStorage.setItem('user', JSON.stringify({userId,firstName,lastName, email }))

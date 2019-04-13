@@ -34,7 +34,7 @@ export class QuestionFormComponent implements OnInit{
 
     ngOnInit(){
         if(!this.authService.isLoggedIn()){
-            // this.router.navigateByUrl('/signin')
+            this.router.navigateByUrl('/signin')
         }
             this.signinForm= new FormGroup({
                 title: new FormControl('',[

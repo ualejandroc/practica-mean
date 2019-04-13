@@ -25,7 +25,7 @@
         Respuestas
     </h3>
 
-    <ul class="answers-list" *ngIf="question.answer.length>0">
+    <ul class="answers-list" *ngIf="question.answer.length > 0">
         <li *ngFor="let answer of question.answer">
             <h5>{{answer.user.firstName}} {{answer.user.lastName}}
                 <small>{{answer.createdAt | amLocale: 'es' | amTimeAgo}}</small>
@@ -33,19 +33,6 @@
             <p class='description'>{{answer.description}}</p>
         </li>
 
-        <li>
-            <h5>Paula becerra
-                <small>Hace unos segundos</small>
-            </h5>
-            <p class='description'>Tengo la respuesta</p>
-        </li>
-
-        <li>
-            <h5>Paula becerra
-                <small>Hace unos segundos</small>
-            </h5>
-            <p class='description'>Tengo la respuesta</p>
-        </li>
     </ul>
 
     <p *ngIf="question.answer.length==0">Se el primero en responder...</p>
