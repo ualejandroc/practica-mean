@@ -34,8 +34,8 @@ export const questionsMiddeleware=(req, res, next)=>{
 //     next()
 // }
 export const  questionMiddeleware= async (req, res, next)=>{
-    console.log(req.question)
-    try{req.question = await question.findById(req,params.id)
+    console.log("From QuestionMiddleware:"+req.body.title)
+    try{req.question = await question.fetchOne({title: req.body.title})
     next()}
     catch(error){
         handleError(error, res)

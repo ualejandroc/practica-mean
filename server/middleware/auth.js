@@ -17,16 +17,17 @@ const debug = new Debug('practica-mean:auth-middleware')
 // export const findUserByEmail=e => users.find((user)=>user.email ==e)
 
 export const required = (req, res, next)=>{
-    jwt.verify(req.query.token, secret, (err,token)=>{
+    //console.log('Tiene datos post:'+  req.body.description)
+    jwt.verify(req.query.token,/* secret  */ 'miclave', (err,token)=>{
         if(err){
-            debug('JWTF was not encrypted with our secret')
+            console.log('JWTF was not encrypted with our secret')
             return res.status(401).json({
                 message: 'Unauthorized',
                 error: err
             })
         }
-        debug(`Token verified ${token}` );
-        req.user = token.user
+        console.log(`Token verified ${JSON.stringify(  token)}` );
+        req.user = token//{"email":"mail1@mail.com","fullName":"New","_id":"5ca9ae8cff0e7902342222da","iat":1555293451,"exp":1555379851}
         next()
     })
 }

@@ -69,7 +69,7 @@ app.get('/', async (req, res)=>{
       const {sort} = req.query
       let questions = await question.findAll(sort)  
       res.status(200).json(questions)
-    //   console.log(questions)
+    
     }catch(err){
         handleError(err,res) 
     }
@@ -79,10 +79,7 @@ app.get('/', async (req, res)=>{
 
 //cuando el frontend reciba   api/questions/:id
 app.get('/:id', async (req, res)=> {
-    // const {id} = req.params
-    // const q = question.find(question=> question._id == +id)
-    //res.status(200).json(q)
-
+    
     try{
         const q =  await question.findById(req.params.id)       
         res.status(200).json(q)        
@@ -94,9 +91,10 @@ app.get('/:id', async (req, res)=> {
 })
 
 
-app.post("/",  /*required,  questionMiddeleware, */   async (req,res)=>{   
+app.post("/",  required,  questionMiddeleware,    async (req,res)=>{   
   
-    
+    console.log("Existe registro:" + req.question)
+    console.log("Enviado:" + JSON.stringify(  req.body )  )
     const {title, description, icon} = req.body
     const q = {
         title, 

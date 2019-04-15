@@ -4,6 +4,11 @@ import {Question, Answer} from '../models'
 const debug = new Debug('practica-mean:db-api:questions') 
 
 export default {
+
+    fetchOne:(obj)=>{
+        return Question.findOne(obj)
+    },
+
     findAll: (sort = '-createdAt' ) => {
         debug('Finding all questions')
         return  Question.find().populate('answers').sort(sort)
