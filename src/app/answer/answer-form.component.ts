@@ -11,6 +11,8 @@ import SweetScroll from 'sweet-scroll'
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 
+import { Location } from '@angular/common';
+
 @Component({
     selector:'app-answer-form',
     templateUrl:'./answer-form.component.html',
@@ -33,7 +35,8 @@ export class  AnswerFormComponent{
     constructor(
         private questionService: QuestionService,
         private authService: AuthService,
-        private router: Router   ){
+        private router: Router ,
+        private location: Location  ){
         this.sweetScroll= new SweetScroll()
     }
 
@@ -62,6 +65,8 @@ export class  AnswerFormComponent{
             )
         
         form.reset();
+
+        setTimeout(function(){ location.reload()  }, 3000)
     }
 
 }

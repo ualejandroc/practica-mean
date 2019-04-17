@@ -43,10 +43,25 @@ export default {
     },
 
     createAnswer : async (q,a) =>{
+        var question= new Question(q)
         const answer = new Answer(a)
-        const savedAnswer = answer.save()
-        q.answers.push(savedAnswer)
-        await q.save()
+        const savedAnswer = await answer.save()    
+
+        question = await Question
+                    .findByIdAndUpdate(q._id, 
+                        { $addToSet: {answer: savedAnswer }},  //
+                        {upsert: true, new: true, runValidators: true},
+                        function(err, res) {
+                            if (err) {
+                            console.log("err:"+ err);
+                            }
+                            
+                          });
+
+        //console.log("Objeto question base:"+ JSON.stringify( question.answer) )
+        question= question.answer.push(savedAnswer)
+
+        await question.save()
         return savedAnswer
     }
 

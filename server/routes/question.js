@@ -105,24 +105,28 @@ app.post("/",  required,  questionMiddeleware,    async (req,res)=>{
 
     try{
         const savedQuestion = await question.create(q)
-        response.status(201).json(savedQuestion)        
+        res.status(201).json(savedQuestion)    
+        
     }
     catch(error){
+       
         handleError(error,res)
     }
     
 })
 
-///// ANswers //////
+///// Answers //////
 
-app.post('/:id/answer', /* required, questionMiddeleware ,*/  async (res,requ)=>{
-    const answer = req.body
-    const q = req.question   // ya tenemos este question por el questionMiddeleware
+app.post('/:id/answer', required, questionMiddeleware ,  async (req, res)=>{
+    
+    
+    var answer = req.body
+    const q = req.body.question   // ya tenemos este question por el questionMiddeleware
     answer.createdAt= new Date()
     answer.user= new User(    // este user se llena por el userMiddleware
                     req.user
     )
-    // q.answers.push(answer)
+    
     try{
         const savedAnswer = await question.createAnswer(q, answer)
         response.status(201).json(savedAnswer)        

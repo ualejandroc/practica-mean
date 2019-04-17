@@ -17,7 +17,7 @@ const debug = new Debug('practica-mean:auth-middleware')
 // export const findUserByEmail=e => users.find((user)=>user.email ==e)
 
 export const required = (req, res, next)=>{
-    //console.log('Tiene datos post:'+  req.body.description)
+    //console.log('Tiene datos de token:'+  req.query.token)
     jwt.verify(req.query.token,/* secret  */ 'miclave', (err,token)=>{
         if(err){
             console.log('JWTF was not encrypted with our secret')

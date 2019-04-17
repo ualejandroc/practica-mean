@@ -73,6 +73,9 @@ export class QuestionFormComponent implements OnInit{
         );
 
         form.resetForm();
+        var self=this;
+        setTimeout(function(){  self.router.navigate(["/"])}, 3000);
+        
     }
 
     getIconVersion(icon:any){

@@ -73,7 +73,7 @@ export class QuestionService{
         const headers = new Headers({'Content-Type':'application/json'});
         const token =localStorage.getItem('token');
 
-        const url =urljoin(this.questionsUrl, answer.question._id, 'answers')
+        const url =urljoin(this.questionsUrl, answer.question._id, 'answer')
 
         return this.http.post(url+`?token=${token}`,body,{headers})
             .map((response:Response)=>response.json())
