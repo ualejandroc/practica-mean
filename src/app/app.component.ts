@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,8 @@ import { AuthService } from './auth/auth.service';
 export class AppComponent {
   title = 'practica-mean';
 
-  constructor(private authService: AuthService){}
+  constructor(private authService: AuthService,
+    private router: Router ){}
 
 
   isLoggedIn(){
@@ -22,6 +24,11 @@ export class AppComponent {
 
   logout(){
     this.authService.logout();
+  }
+
+
+  toHome(){
+    this.router.navigateByUrl('/')
   }
 
 }

@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">  
-    <span [routerLink]="['/']">Proyecto Practica</span>
+    <a (click)='toHome()' >Proyecto Practica</a>
     <span class="space"></span>
     
     <button *ngIf = "!isLoggedIn()" [routerLink]="['/signin']" mat-icon-button>

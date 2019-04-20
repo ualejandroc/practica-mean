@@ -25,7 +25,7 @@
         Respuestas
     </h3>
 
-    <ul class="answers-list" *ngIf="question.answer.length > 0">
+    <ul class="answers-list" *ngIf="question.answer.length>0">
         <li *ngFor="let answer of question.answer">
             <h5>{{answer.user.firstName}} {{answer.user.lastName}}
                 <small>{{answer.createdAt | amLocale: 'es' | amTimeAgo}}</small>
