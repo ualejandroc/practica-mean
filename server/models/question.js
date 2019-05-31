@@ -2,7 +2,7 @@ import mongoose, {Schema} from 'mongoose'
 
 mongoose.set('useCreateIndex', true);
 
-mongoose.connect("mongodb+srv://ualejandroc:12345@cluster0-w4pp5.mongodb.net/test?retryWrites=true", { useNewUrlParser: true } );
+mongoose.connect("mongodb+srv://ualejandroc:<12345>@cluster0-w4pp5.mongodb.net/test?retryWrites=true", { useNewUrlParser: true } );
 
 
 const QuestionSchema = Schema({
